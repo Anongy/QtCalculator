@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <sstream>
 #include "Calculator.h"
@@ -43,19 +43,19 @@ void Calculator::clearnum()
 
 void Calculator::clearans()
 {
-	answer = calculate_number("0", 1, 0);
+	answer = calculate_number("0", 0, 0);
 }
 
 calculate_number Calculator::Cal_operate()
 {
 	deque<bool> operatetype;
-	stack<int> Temp1; //ºó×º±í´ïÊ½×ª»»Õ»
-	operatedeque Tempdeque; //Ôİ´æºó×º±í´ïÊ½
-	stack<calculate_number> Temp2; //¼ÆËãÕ»
+	stack<int> Temp1; //åç¼€è¡¨è¾¾å¼è½¬æ¢æ ˆ
+	operatedeque Tempdeque; //æš‚å­˜åç¼€è¡¨è¾¾å¼
+	stack<calculate_number> Temp2; //è®¡ç®—æ ˆ
 	Temp_deque.push(0);
 	iscnum.push_back(false);
 	Temp1.push(0);
-	//Ç°×º±í´ïÊ½Ïòºó×º±í´ïÊ½µÄ×ª»¯
+	//å‰ç¼€è¡¨è¾¾å¼å‘åç¼€è¡¨è¾¾å¼çš„è½¬åŒ–
 	while (!iscnum.empty()) {
 		if (iscnum.front()) {
 			operatetype.push_back(true);
@@ -64,17 +64,25 @@ calculate_number Calculator::Cal_operate()
 		}
 		else if (!iscnum.front()) {
 			int op = Temp_deque.optop();
-			if (op>30&&op<=60) { //µ¥Ä¿ÔËËã·ûÖ±½Ó½«²Ù×÷Êı²ÎÓëÔËËãºóÑ¹Õ»
-				calculate_number temp("0",1,0);
-				if (Temp_deque.cnumempty())temp = operators.operate(op, answer);
-				else temp = operators.operate(op, Temp_deque.cnumtop());
+			if (op>30&&op<=60) { //å•ç›®è¿ç®—ç¬¦ç›´æ¥å°†æ“ä½œæ•°å‚ä¸è¿ç®—åè¿”å› //å¦ä¸€ç§æ–¹æ³•æ˜¯æŠŠå•ç›®è¿ç®—ç¬¦å½“ç‰¹æ®Šæ‹¬å·
+				calculate_number temp("0",0,0);
+				if (Temp_deque.cnumempty()) {
+					temp = operators.operate(op, answer);
+					answer = temp;
+				}
+				else {
+					temp = operators.operate(op, Temp_deque.cnumtop());
+					answer = temp;
+				}
 				if (temp.iserror())return temp;
-				Tempdeque.push(temp);
-				operatetype.push_back(true);
-				Temp_deque.cnumpop();
+				//Tempdeque.push(temp);
+				//operatetype.push_back(true);
+				if(!Temp_deque.cnumempty())Temp_deque.cnumpop();
 				Temp_deque.oppop();
+				Temp_deque.push(temp);
+				return temp;
 			}
-			else if (op >= 0 && op <= 30) {
+			else if ((op >= 0 && op <= 30)||op==98||op==99) {
 				if (icp[op] > isp[Temp1.top()]) {
 					Temp1.push(op);
 				}
@@ -96,10 +104,13 @@ calculate_number Calculator::Cal_operate()
 				}
 				Temp_deque.oppop();
 			}
+			else {
+				Temp_deque.oppop();
+			}
 		}
 		iscnum.pop_front();
 	}
-	//ºó×º±í´ïÊ½µÄ¼ÆËã
+	//åç¼€è¡¨è¾¾å¼çš„è®¡ç®—
 	Temp2.push(answer);
 	while (!operatetype.empty()) {
 		if (operatetype.front()) {

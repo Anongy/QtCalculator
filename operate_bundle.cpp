@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cmath>
 #include <string>
 #include <stack>
@@ -90,6 +90,7 @@ calculate_number operate_bundle::minus(calculate_number cnum1) {
 }
 
 calculate_number operate_bundle::mod(calculate_number cnum1, calculate_number cnum2) {
+	if(cnum2.cnumtod()==0)return calculate_number("@", 0, 0);
 	if(cnum1.get_digit()!=cnum1.get_sigdigit()|| cnum2.get_digit() != cnum2.get_sigdigit())return calculate_number("#", 0, 0);
 	return calculate_number(cnum1.cnumtoi() % cnum2.cnumtoi());
 }

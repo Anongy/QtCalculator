@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -7,18 +7,18 @@
 
 using namespace std;
 
-const long long int MAX_SIG_NUM = 999999999; //×î´óÓĞĞ§Êı×Ö
-const int MAX_DIGIT = 9; //×î´óÓĞĞ§ÊıÎ»
+const long long int MAX_SIG_NUM = 999999999999; //æœ€å¤§æœ‰æ•ˆæ•°å­—
+const int MAX_DIGIT = 10; //æœ€å¤§æœ‰æ•ˆæ•°ä½
 
-class calculate_number //¼ÆËãÊı×Ö
+class calculate_number //è®¡ç®—æ•°å­—
 {
 private:
-	string significant_number; //ÓĞĞ§Êı×Ö,×Ö·ûĞÍ·½±ãÀ©³ä¸ß¾«¶È
-	//"!" Òç³ö //"@"³ıÒÔÁã //"#"ÆäËû·Ç·¨²Ù×÷
-	int digit; //ÊıÎ»
-	bool minus; //ÊÇ·ñ¸ºÊı
+	string significant_number; //æœ‰æ•ˆæ•°å­—,å­—ç¬¦å‹æ–¹ä¾¿æ‰©å……é«˜ç²¾åº¦
+	//"!" æº¢å‡º //"@"é™¤ä»¥é›¶ //"#"å…¶ä»–éæ³•æ“ä½œ
+	int digit; //æ•°ä½
+	bool minus; //æ˜¯å¦è´Ÿæ•°
 public:
-	//»ù±¾¹¹ÔìÓëÎö¹¹º¯Êı
+	//åŸºæœ¬æ„é€ ä¸ææ„å‡½æ•°
 	calculate_number(string sn, int d, bool m) :significant_number(sn), digit(d), minus(m) {}
 	calculate_number(const calculate_number& cnum) {
 		significant_number = cnum.significant_number;
@@ -33,7 +33,7 @@ public:
 		return *this;
 	}
 	// void set_digit(int d) { digit = d; }
-	//Êı¾İÀàĞÍ×ª»»º¯Êı,º¯ÊıÌåÔÚcalculate_number.cppÖĞ¶¨Òå
+	//æ•°æ®ç±»å‹è½¬æ¢å‡½æ•°,å‡½æ•°ä½“åœ¨calculate_number.cppä¸­å®šä¹‰
 	calculate_number(long long int t);
 	calculate_number(string t);
 	calculate_number(double t);
@@ -44,9 +44,10 @@ public:
 	const long long int cnumtoi();
 	const double cnumtod();
 	const string cnumtos();
+	const string printcnum(bool& haderror); //é”™è¯¯è¾“å‡ºä¸æ ¼å¼è¾“å‡º
 };
 
-class operatestack //²Ù×÷Õ» 
+class operatestack //æ“ä½œæ ˆ 
 {
 private:
 	stack<int> operatorstack;
@@ -62,31 +63,26 @@ public:
 	void push(calculate_number cnum);
 };
 
-class operate_bundle //²Ù×÷°ü,¿ÉÒÔÀ©³ä²»Í¬ÔËËã
+class operate_bundle //æ“ä½œåŒ…,å¯ä»¥æ‰©å……ä¸åŒè¿ç®—
 {
 private:
-	//Ë«Ä¿ÔËËã·ûÍ³Ò»Îª1~30
+	//åŒç›®è¿ç®—ç¬¦ç»Ÿä¸€ä¸º1~30
 	calculate_number add(calculate_number cnum1, calculate_number cnum2); //1
 	calculate_number subtract(calculate_number cnum1, calculate_number cnum2); //2
 	calculate_number multiply(calculate_number cnum1, calculate_number cnum2); //3
 	calculate_number divide(calculate_number cnum1, calculate_number cnum2); //4
 	calculate_number mod(calculate_number cnum1, calculate_number cnum2); //5
-	//µ¥Ä¿ÔËËã·ûÍ³Ò»Îª31~60
+	//å•ç›®è¿ç®—ç¬¦ç»Ÿä¸€ä¸º31~60
 	calculate_number ssqar(calculate_number cnum1); //31
 	calculate_number ssqrt(calculate_number cnum1); //32
 	calculate_number minus(calculate_number cnum1); //33
-	//¸ß¾«¶È¼ÆËãº¯Êı½Ó¿Ú
-	calculate_number hpadd(calculate_number cnum1, calculate_number cnum2); //11
-	calculate_number hpsubtract(calculate_number cnum1, calculate_number cnum2); //12
-	calculate_number hpmultiply(calculate_number cnum1, calculate_number cnum2); //13
-	calculate_number hpdivide(calculate_number cnum1, calculate_number cnum2); //14
 public:
-	calculate_number operate(int op,calculate_number cnum1, calculate_number cnum2); //Ë«Ä¿
-	calculate_number operate(int op, calculate_number cnum1); //µ¥Ä¿
-	//º¯ÊıºóµÄ×¢ÊÍÎª²Ù×÷Âë //×óÓÒÀ¨ºÅµÄ²Ù×÷ÂëÎª98Óë99 #±êÖ¾ºÅ²Ù×÷ÂëÎª0
+	calculate_number operate(int op,calculate_number cnum1, calculate_number cnum2); //åŒç›®
+	calculate_number operate(int op, calculate_number cnum1); //å•ç›®
+	//å‡½æ•°åçš„æ³¨é‡Šä¸ºæ“ä½œç  //å·¦å³æ‹¬å·çš„æ“ä½œç ä¸º98ä¸99 #æ ‡å¿—å·æ“ä½œç ä¸º0
 };
 
-class operatedeque //Ôİ´æ¶ÓÁĞ
+class operatedeque //æš‚å­˜é˜Ÿåˆ—
 {
 private:
 	deque<int> operatordeque;
@@ -107,19 +103,19 @@ public:
 
 class Calculator {
 private:
-	int isp[100] = { 0 }; //²Ù×÷ÂëÊı×é,Êı×éÏÂ±êÎª²Ù×÷Âë,Êı×éÄÚÈİÎª²Ù×÷ÓÅÏÈ¼¶,ÔÚ¹¹Ôìº¯ÊıÄÚ¶¨
+	int isp[100] = { 0 }; //æ“ä½œç æ•°ç»„,æ•°ç»„ä¸‹æ ‡ä¸ºæ“ä½œç ,æ•°ç»„å†…å®¹ä¸ºæ“ä½œä¼˜å…ˆçº§,åœ¨æ„é€ å‡½æ•°å†…å®š
 	int icp[100] = { 0 };
-	deque<bool> iscnum; //±êÖ¾¶ÓÁĞÖĞÊı¾İÀàĞÍ
-	//×óÓÒÀ¨ºÅµÄ²Ù×÷ÂëÎª98Óë99 #±êÖ¾ºÅ²Ù×÷ÂëÎª0
+	deque<bool> iscnum; //æ ‡å¿—é˜Ÿåˆ—ä¸­æ•°æ®ç±»å‹
+	//å·¦å³æ‹¬å·çš„æ“ä½œç ä¸º98ä¸99 #æ ‡å¿—å·æ“ä½œç ä¸º0
 	operate_bundle operators;
-	operatedeque Temp_deque; //Ôİ´æ¶ÓÁĞ
-	calculate_number answer = {"0",1,0}; //²Ù×÷½á¹û
+	operatedeque Temp_deque; //æš‚å­˜é˜Ÿåˆ—
+	calculate_number answer = {"0",0,0}; //æ“ä½œç»“æœ 
 public:
 	Calculator();
-	void getop(int op = -1); //»ñÈ¡²Ù×÷Âë(·½±ãÓëÍ¼ĞÎ½çÃæĞ­µ÷)
-	void getcnum(calculate_number cnum = { "",0,0 }); //»ñÈ¡²Ù×÷Êı,Í¬ÉÏ
-	void deletenum(); //´ÓÔİ´æ¶ÓÁĞÖĞÉ¾³ıÊı¾İ
-	void clearnum(); //´ÓÔİ´æ¶ÓÁĞÖĞÇå¿ÕÊı¾İ
-	void clearans(); //Çå³ı±£´æµÄÏÖÓĞÊı¾İ
-	calculate_number Cal_operate(); //Ö÷ÔËËã
+	void getop(int op = -1); //è·å–æ“ä½œç (æ–¹ä¾¿ä¸å›¾å½¢ç•Œé¢åè°ƒ)
+	void getcnum(calculate_number cnum = { "",0,0 }); //è·å–æ“ä½œæ•°,åŒä¸Š
+	void deletenum(); //ä»æš‚å­˜é˜Ÿåˆ—ä¸­åˆ é™¤æ•°æ®
+	void clearnum(); //ä»æš‚å­˜é˜Ÿåˆ—ä¸­æ¸…ç©ºæ•°æ®
+	void clearans(); //æ¸…é™¤ä¿å­˜çš„ç°æœ‰æ•°æ®
+	calculate_number Cal_operate(); //ä¸»è¿ç®—
 };

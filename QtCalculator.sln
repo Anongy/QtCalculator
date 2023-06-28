@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.3.32922.545
+VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtCalculator", "QtCalculator.vcxproj", "{BEA1827A-625B-443E-B1E6-DA663B3AA514}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtCalculator", "QtCalculator.vcxproj", "{31EE5C54-C32A-4DA7-A072-B3122322E4AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BEA1827A-625B-443E-B1E6-DA663B3AA514}.Debug|x64.ActiveCfg = Debug|x64
-		{BEA1827A-625B-443E-B1E6-DA663B3AA514}.Debug|x64.Build.0 = Debug|x64
-		{BEA1827A-625B-443E-B1E6-DA663B3AA514}.Release|x64.ActiveCfg = Release|x64
-		{BEA1827A-625B-443E-B1E6-DA663B3AA514}.Release|x64.Build.0 = Release|x64
+		{31EE5C54-C32A-4DA7-A072-B3122322E4AA}.Debug|x64.ActiveCfg = Debug|x64
+		{31EE5C54-C32A-4DA7-A072-B3122322E4AA}.Debug|x64.Build.0 = Debug|x64
+		{31EE5C54-C32A-4DA7-A072-B3122322E4AA}.Release|x64.ActiveCfg = Release|x64
+		{31EE5C54-C32A-4DA7-A072-B3122322E4AA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {EAEB18DE-5A9D-49E1-94AB-2F3335A3AB28}
+		SolutionGuid = {FCD099FD-4B66-4D2F-8B97-86C8C8E821F5}
 	EndGlobalSection
 EndGlobal
